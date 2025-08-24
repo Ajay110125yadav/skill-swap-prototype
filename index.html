@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Swap Marketplace</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold text-center mb-6">Skill Swap Marketplace</h1>
+    <p class="text-center mb-4">Share your skills & learn new ones for FREE!</p>
+
+    <!-- Form to Add Skill -->
+    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mb-6">
+      <h2 class="text-xl font-semibold mb-4">Add Your Skill</h2>
+      <div class="mb-4">
+        <label class="block text-gray-700">Your Name</label>
+        <input id="userName" type="text" class="w-full p-2 border rounded" placeholder="Enter your name">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Skill You Offer</label>
+        <input id="skillOffer" type="text" class="w-full p-2 border rounded" placeholder="e.g., Coding, Guitar">
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Skill You Want to Learn</label>
+        <input id="skillWant" type="text" class="w-full p-2 border rounded" placeholder="e.g., Graphic Design">
+      </div>
+      <button onclick="addSkill()" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Submit</button>
+    </div>
+
+    <!-- Display Skills -->
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-xl font-semibold mb-4">Available Skills</h2>
+      <ul id="skillList" class="space-y-4"></ul>
+    </div>
+  </div>
+
+  <script>
+    // Array to store skills
+    let skills = [];
+
+    // Function to add a skill
+    function addSkill() {
+      const name = document.getElementById('userName').value;
+      const offer = document.getElementById('skillOffer').value;
+      const want = document.getElementById('skillWant').value;
+
+      if (name && offer && want) {
+        skills.push({ name, offer, want });
+        displaySkills();
+        // Clear form
+        document.getElementById('userName').value = '';
+        document.getElementById('skillOffer').value = '';
+        document.getElementById('skillWant').value = '';
+      } else {
+        alert('Please fill in all fields!');
+      }
+    }
+
+    // Function to display skills
+    function displaySkills() {
+      const skillList = document.getElementById('skillList');
+      skillList.innerHTML = '';
+      skills.forEach(skill => {
+        const li = document.createElement('li');
+        li.className = 'bg-white p-4 rounded shadow';
+        li.innerHTML = `<strong>${skill.name}</strong> offers <span class="text-blue-500">${skill.offer}</span> and wants to learn <span class="text-green-500">${skill.want}</span>`;
+        skillList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
